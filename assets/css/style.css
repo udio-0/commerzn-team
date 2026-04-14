@@ -133,6 +133,38 @@ body.is-navigating {
   text-align: center;
 }
 
+.company-socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.875rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  transition: border-color var(--ease), color var(--ease), background var(--ease), transform var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-btn:hover,
+.social-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-tint);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.social-btn:active { transform: translateY(0); }
+
 .company-tagline {
   font-size: 0.9rem;
   color: var(--text-muted);
