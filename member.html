@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting…</title>
+  <script>
+    // Forward any ?id= query string to the new team/ path
+    var id = new URLSearchParams(window.location.search).get('id');
+    window.location.replace(id ? 'team/?id=' + encodeURIComponent(id) : 'index.html');
+  </script>
+</head>
+<body></body>
+</html>

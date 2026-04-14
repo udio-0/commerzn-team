@@ -1,0 +1,121 @@
+{
+  "company": {
+    "name": "Commerzn",
+    "tagline": "Service Provider Unip. LDA",
+    "address": "Rua Martins Barata, nº8B 1400-248 Lisboa",
+    "website": "https://commerzn.com",
+    "websiteLabel": "commerzn.com"
+  },
+  "members": [
+    {
+      "id": "nuno-ventura",
+      "name": "Nuno Ventura",
+      "role": "Chief Executive Officer",
+      "photo": "https://i.pravatar.cc/400?img=57",
+      "email": "nuno.ventura@commerzn.com",
+      "phone": "(+351) 910 110 759",
+      "linkedin":  "https://www.linkedin.com/in/nuno-ventura-bab222b6/",
+      "instagram": "https://www.instagram.com/sisu_nuno/",
+      "facebook":  "",
+      "ceo": true
+    },
+    {
+      "id": "raul-serra",
+      "name": "Raul Serra",
+      "role": "Arquitech",
+      "photo": "https://i.pravatar.cc/400?img=12",
+      "email": "raul.serra@commerzn.com",
+      "phone": "+351 914998980",
+      "linkedin":  "https://linkedin.com",
+      "instagram": "https://instagram.com",
+      "facebook":  "https://facebook.com",
+      "ceo": false
+    },
+    {
+      "id": "francisco-morgado",
+      "name": "Francisco Morgado",
+      "role": "Arquitech",
+      "photo": "https://i.pravatar.cc/400?img=68",
+      "email": "francisco.morgado@commerzn.com",
+      "phone": "+351 918819155",
+      "linkedin":  "https://linkedin.com",
+      "instagram": "https://instagram.com",
+      "facebook":  "https://facebook.com",
+      "ceo": false
+    },
+    {
+      "id": "augusto-angelo",
+      "name": "Augusto Angelo",
+      "role": "Marketing",
+      "photo": "https://i.pravatar.cc/400?img=8",
+      "email": "augusto.angelo@commerzn.com",
+      "phone": "+351 919315539",
+      "linkedin":  "https://linkedin.com",
+      "instagram": "https://instagram.com",
+      "facebook":  "https://facebook.com",
+      "ceo": false
+    },
+    {
+      "id": "elizabete-angelo",
+      "name": "Elizabete Angelo",
+      "role": "Lawyer",
+      "photo": "https://i.pravatar.cc/400?img=26",
+      "email": "elizabete.angelo@commerzn.com",
+      "phone": "+351 917258117",
+      "linkedin":  "https://linkedin.com",
+      "instagram": "https://instagram.com",
+      "facebook":  "https://facebook.com",
+      "ceo": false
+    },
+        {
+      "id": "eduardo-montenegro",
+      "name": "Eduardo Montenegro",
+      "role": "Photographer",
+      "photo": "https://i.pravatar.cc/400?img=58",
+      "email": "eduardo.montenegro@commerzn.com",
+      "phone": "+351 912439075",
+      "linkedin":  "https://linkedin.com",
+      "instagram": "https://instagram.com",
+      "facebook":  "https://facebook.com",
+      "ceo": false
+    },
+        {
+      "id": "claudio-santos",
+      "name": "Cláudio Santos",
+      "role": "Developer/Software Engineer",
+      "photo": "https://i.pravatar.cc/400?img=14",
+      "email": "claudio.santos@commerzn.com",
+      "phone": "+1 934915403",
+      "linkedin":  "https://linkedin.com",
+      "instagram": "https://instagram.com",
+      "facebook":  "https://facebook.com",
+      "ceo": false
+    }
+  ],
+  "projects": [
+    {
+      "name": "Orbit Rebrand",
+      "description": "Full identity overhaul for a SaaS analytics platform — logo, design system, and launch campaign.",
+      "year": 2024,
+      "tags": ["Branding", "Design System"]
+    },
+    {
+      "name": "Vanta Commerce",
+      "description": "End-to-end e-commerce experience for a luxury streetwear label, built on a custom Jamstack stack.",
+      "year": 2024,
+      "tags": ["Web", "E-Commerce"]
+    },
+    {
+      "name": "Solstice App",
+      "description": "iOS wellness app with onboarding animations, motion design, and an AR journaling feature.",
+      "year": 2023,
+      "tags": ["Mobile", "Motion"]
+    },
+    {
+      "name": "Flux Campaign",
+      "description": "360° digital campaign for a fintech launch — social, motion, and an interactive landing page.",
+      "year": 2023,
+      "tags": ["Campaign", "Motion"]
+    }
+  ]
+}

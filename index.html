@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Commerzn — Meet the team behind exceptional digital experiences.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Commerzn — Team">
+  <meta property="og:description" content="Meet the team behind exceptional digital experiences.">
+  <meta property="og:type"        content="website">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel="preconnect" href="https://i.pravatar.cc">
+  <link rel="preconnect" href="https://images.squarespace-cdn.com">
+</head>
+<body>
+
+  <!-- Loading state — shown until JS populates the page -->
+  <div id="loading" class="state-loading" aria-live="polite" aria-busy="true">
+    <div class="spinner" role="status"><span class="sr-only">Loading…</span></div>
+  </div>
+
+  <!-- Main content — hidden until data loads -->
+  <div id="main-content" class="page-root" hidden>
+
+    <!-- ── Company header ────────────────────────────── -->
+    <header class="company-header" role="banner">
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/669f91826a988a40a2fe3bf1/dbc3d52a-a4c8-421f-8dd4-f9b8d8187995/Logo_commerzn_square_edit.jpg?format=500w"
+        alt="Commerzn"
+        class="company-header__logo"
+        width="120"
+        height="120"
+      >
+      <p class="company-tagline" id="company-tagline"></p>
+      <div class="company-meta">
+        <div class="company-meta__row" id="company-address"></div>
+        <div class="company-meta__row" id="company-website-row"></div>
+      </div>
+    </header>
+
+    <!-- ── Team grid ─────────────────────────────────── -->
+    <main>
+      <div class="section-header" aria-labelledby="team-heading">
+        <div class="section-title-line" aria-hidden="true"></div>
+      </div>
+      <div id="team-grid" class="team-grid" role="list"></div>
+
+      <!-- ── Completed projects ──────────────────────── -->
+      <div class="section-header" aria-labelledby="projects-heading">
+        <h2 class="section-title" id="projects-heading">Completed Projects</h2>
+        <div class="section-title-line" aria-hidden="true"></div>
+      </div>
+      <div id="projects-grid" class="projects-grid" role="list"></div>
+    </main>
+
+    <!-- ── Footer ────────────────────────────────────── -->
+    <footer class="site-footer" role="contentinfo">
+      <p id="footer-company"></p>
+    </footer>
+
+  </div><!-- /#main-content -->
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
