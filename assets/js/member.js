@@ -55,50 +55,19 @@ function buildVCF(member, companyName) {
 }
 
 async function addContact(member, companyName) {
-  const content  = buildVCF(member, companyName);
   const filename = `${member.id}.vcf`;
-  const isAndroid = /android/i.test(navigator.userAgent);
+  const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
-  // Android: open the VCF via an <a> click WITHOUT the download attribute.
-  // This tells the browser to let the OS handle the MIME type, which triggers
-  // Android's native "Create Contact" screen with all details pre-filled.
-  if (isAndroid) {
-    const blob = new Blob([content], { type: 'text/x-vcard' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    // No a.download — this is intentional so Android opens instead of saving
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  // Mobile: navigate to the static .vcf file hosted on the server.
+  // The server sends it with the correct MIME type (text/vcard), which
+  // triggers Android's native "Create Contact" / iOS Contacts import.
+  if (isMobile) {
+    window.location.href = `../contacts/${filename}`;
     return;
   }
 
-  // iOS / macOS: Web Share API works well with vCard files
-  if (navigator.share) {
-    const mimeTypes = ['text/vcard', 'text/x-vcard', 'text/plain'];
-    let shareFile = null;
-    for (const mime of mimeTypes) {
-      const f = new File([content], filename, { type: mime });
-      if (!navigator.canShare || navigator.canShare({ files: [f] })) {
-        shareFile = f;
-        break;
-      }
-    }
-
-    if (shareFile) {
-      try {
-        await navigator.share({ files: [shareFile] });
-        return;
-      } catch (e) {
-        if (e.name === 'AbortError') return; // user cancelled
-      }
-    }
-  }
-
-  // Fallback: download (desktop)
+  // Desktop: download the VCF file
+  const content = buildVCF(member, companyName);
   const url = URL.createObjectURL(new Blob([content], { type: 'text/vcard' }));
   const a   = document.createElement('a');
   a.href     = url;

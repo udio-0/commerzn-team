@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Cláudio Santos
+N:Santos;Cláudio;;;
+TITLE:Developer/Software Engineer
+ORG:Commerzn
+EMAIL;TYPE=WORK:claudio.santos@commerzn.com
+TEL;TYPE=WORK,VOICE:+1 934915403
+URL;TYPE=LinkedIn:https://linkedin.com
+URL;TYPE=Instagram:https://instagram.com
+URL;TYPE=Facebook:https://facebook.com
+END:VCARD

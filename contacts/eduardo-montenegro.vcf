@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Eduardo Montenegro
+N:Montenegro;Eduardo;;;
+TITLE:Photographer
+ORG:Commerzn
+EMAIL;TYPE=WORK:eduardo.montenegro@commerzn.com
+TEL;TYPE=WORK,VOICE:+351 912439075
+URL;TYPE=LinkedIn:https://linkedin.com
+URL;TYPE=Instagram:https://instagram.com
+URL;TYPE=Facebook:https://facebook.com
+END:VCARD
