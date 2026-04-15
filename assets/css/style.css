@@ -663,6 +663,197 @@ body.is-navigating {
 }
 
 /* ============================================================
+   CONTACT PREVIEW MODAL (bottom sheet)
+   ============================================================ */
+
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.contact-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.contact-modal--open .contact-modal__backdrop {
+  opacity: 1;
+}
+
+.contact-modal__sheet {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  padding: 0.75rem var(--pad) 2rem;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  pointer-events: auto;
+  max-height: 90dvh;
+  overflow-y: auto;
+}
+
+.contact-modal--open .contact-modal__sheet {
+  transform: translateY(0);
+}
+
+.contact-modal__handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-3);
+  margin: 0 auto 1.25rem;
+}
+
+.contact-modal__header {
+  text-align: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-modal__photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  margin: 0 auto 0.75rem;
+  border: 2px solid var(--accent-2);
+}
+
+.contact-modal__name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.contact-modal__role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.contact-modal__company {
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-top: 0.15rem;
+  font-weight: 500;
+}
+
+.contact-modal__details {
+  padding: 0.75rem 0;
+}
+
+.contact-modal__row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--ease);
+  border-radius: var(--r-sm);
+}
+
+.contact-modal__row:last-child {
+  border-bottom: none;
+}
+
+a.contact-modal__row:hover {
+  background: var(--surface);
+}
+
+.contact-modal__row-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.contact-modal__row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-modal__row-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+}
+
+.contact-modal__row-value {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-modal__actions {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contact-modal__save {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: var(--r);
+  background: var(--accent-gradient);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--ease), transform var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-modal__save:hover { opacity: 0.9; }
+.contact-modal__save:active { transform: scale(0.98); }
+
+.contact-modal__cancel {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--ease), background var(--ease);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-modal__cancel:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-2);
+}
+
+/* ============================================================
    STATES: Loading / Error
    ============================================================ */
 
