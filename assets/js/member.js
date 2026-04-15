@@ -128,11 +128,30 @@ function showContactModal(member, companyName) {
   modal.querySelector('.contact-modal__backdrop').addEventListener('click', close);
   document.getElementById('modal-cancel').addEventListener('click', close);
 
-  // Save button — navigate to Cloudflare Worker which serves the VCF
-  // with Content-Disposition: inline, so Android/iOS open Contacts app directly
-  const WORKER_BASE = 'https://commerzn-vcard.claudioalexsantos.workers.dev';
+  // Save button — download VCF file
   document.getElementById('modal-save-contact').addEventListener('click', () => {
-    window.location.href = `${WORKER_BASE}/${member.id}.vcf`;
+    const [first, ...rest] = member.name.trim().split(/\s+/);
+    const last = rest.join(' ');
+    const lines = [
+      'BEGIN:VCARD', 'VERSION:3.0',
+      `FN:${member.name}`, `N:${last};${first};;;`,
+      `TITLE:${member.role}`, `ORG:${companyName}`,
+      `EMAIL;TYPE=WORK:${member.email}`,
+    ];
+    if (member.phone)     lines.push(`TEL;TYPE=WORK,VOICE:${member.phone}`);
+    if (member.linkedin)  lines.push(`URL;TYPE=LinkedIn:${member.linkedin}`);
+    if (member.instagram) lines.push(`URL;TYPE=Instagram:${member.instagram}`);
+    lines.push('END:VCARD');
+
+    const content = lines.join('\r\n');
+    const url = URL.createObjectURL(new Blob([content], { type: 'text/vcard' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${member.id}.vcf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   });
 }
 
