@@ -59,13 +59,20 @@ async function addContact(member, companyName) {
   const filename = `${member.id}.vcf`;
   const isAndroid = /android/i.test(navigator.userAgent);
 
-  // Android: open the VCF blob directly — the OS intercepts text/vcard
-  // and launches the native "Add Contact" screen with all details filled in
+  // Android: open the VCF via an <a> click WITHOUT the download attribute.
+  // This tells the browser to let the OS handle the MIME type, which triggers
+  // Android's native "Create Contact" screen with all details pre-filled.
   if (isAndroid) {
-    const url = URL.createObjectURL(new Blob([content], { type: 'text/x-vcard' }));
-    window.location.href = url;
-    // Revoke after a short delay so the OS has time to read it
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    const blob = new Blob([content], { type: 'text/x-vcard' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    // No a.download — this is intentional so Android opens instead of saving
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
     return;
   }
 
@@ -91,7 +98,7 @@ async function addContact(member, companyName) {
     }
   }
 
-  // Fallback: download (desktop or no Web Share API support)
+  // Fallback: download (desktop)
   const url = URL.createObjectURL(new Blob([content], { type: 'text/vcard' }));
   const a   = document.createElement('a');
   a.href     = url;
