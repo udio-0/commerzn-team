@@ -94,28 +94,28 @@
   ],
   "projects": [
     {
-      "name": "Orbit Rebrand",
-      "description": "Full identity overhaul for a SaaS analytics platform — logo, design system, and launch campaign.",
-      "year": 2024,
-      "tags": ["Branding", "Design System"]
+      "name": "Freitas Reis",
+      "description": "A renovated four‑suite home in Cascais near the Museum Quarter, featuring a 65 sqm living and dining open space with chef’s kitchen, a master suite with freestanding bathtub, plus ground floor suites, a bar with wine cellar, and 115 sqm of terraces with natural light throughout.",
+      "year": 2018,
+      "tags": ["Renovation", "Multi‑suite layout"],
+      "link": "https://www.commerzn.com/projects/freitas-reis",
+      "image": "https://images.squarespace-cdn.com/content/v1/669f91826a988a40a2fe3bf1/11ba4e87-df26-4056-b67a-fe456d7249e3/2020_FreitasReis33_Commerzn-1674.jpg?format=500w"
     },
     {
-      "name": "Vanta Commerce",
-      "description": "End-to-end e-commerce experience for a luxury streetwear label, built on a custom Jamstack stack.",
-      "year": 2024,
-      "tags": ["Web", "E-Commerce"]
+      "name": "Lido 09 House",
+      "description": "A reinvented Monte Estoril mansion with a noble social floor, qualified suites, an attic, garden, pool, and private parking.",
+      "year": 2019,
+      "tags": ["Historic renovation", "Contemporary reinvention"],
+      "link": "https://www.commerzn.com/projects/lido",
+      "image": "https://images.squarespace-cdn.com/content/v1/669f91826a988a40a2fe3bf1/557c24e9-6914-4bd8-a608-a5f7a74c62d2/20210609-DSC_9274.jpg?format=500w"
     },
     {
-      "name": "Solstice App",
-      "description": "iOS wellness app with onboarding animations, motion design, and an AR journaling feature.",
-      "year": 2023,
-      "tags": ["Mobile", "Motion"]
-    },
-    {
-      "name": "Flux Campaign",
-      "description": "360° digital campaign for a fintech launch — social, motion, and an interactive landing page.",
-      "year": 2023,
-      "tags": ["Campaign", "Motion"]
+      "name": "Sant’ana Estoril House",
+      "description": "Despite hidden adversities, this technologically advanced Cascais trilogy home overcame structural challenges to achieve an enriching result with a harmonious water tank design.",
+      "year": 2022,
+      "tags": ["Renovation", "Historic house"],
+      "link": "https://www.commerzn.com/projects/santana-estoril-house",
+      "image": "https://images.squarespace-cdn.com/content/v1/669f91826a988a40a2fe3bf1/fdf8ec0e-c60e-4efe-b38d-9d308183a513/20240919-DSCF2791.jpg?format=500w"
     }
   ]
 }

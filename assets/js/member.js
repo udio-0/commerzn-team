@@ -57,9 +57,20 @@ function buildVCF(member, companyName) {
 async function addContact(member, companyName) {
   const content  = buildVCF(member, companyName);
   const filename = `${member.id}.vcf`;
+  const isAndroid = /android/i.test(navigator.userAgent);
 
+  // Android: open the VCF blob directly — the OS intercepts text/vcard
+  // and launches the native "Add Contact" screen with all details filled in
+  if (isAndroid) {
+    const url = URL.createObjectURL(new Blob([content], { type: 'text/x-vcard' }));
+    window.location.href = url;
+    // Revoke after a short delay so the OS has time to read it
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    return;
+  }
+
+  // iOS / macOS: Web Share API works well with vCard files
   if (navigator.share) {
-    // Chrome's Web Share API allowlist may reject text/vcard — try text/plain fallback
     const mimeTypes = ['text/vcard', 'text/x-vcard', 'text/plain'];
     let shareFile = null;
     for (const mime of mimeTypes) {

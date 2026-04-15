@@ -11,6 +11,7 @@
   <meta property="og:description" content="Meet the team behind exceptional digital experiences.">
   <meta property="og:type"        content="website">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <link rel="preconnect" href="https://i.pravatar.cc">
@@ -68,10 +69,15 @@
 
       <!-- ── Completed projects ──────────────────────── -->
       <div class="section-header" aria-labelledby="projects-heading">
-        <h2 class="section-title" id="projects-heading">Completed Projects</h2>
+        <h2 class="section-title" id="projects-heading">Triology </h2>
         <div class="section-title-line" aria-hidden="true"></div>
       </div>
-      <div id="projects-grid" class="projects-grid" role="list"></div>
+      <div class="projects-swiper-wrap">
+        <div id="projects-swiper" class="swiper projects-swiper">
+          <div class="swiper-wrapper" id="projects-slides"></div>
+        </div>
+        <p id="project-description" class="project-description"></p>
+      </div>
     </main>
 
     <!-- ── Footer ────────────────────────────────────── -->
@@ -81,6 +87,7 @@
 
   </div><!-- /#main-content -->
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
