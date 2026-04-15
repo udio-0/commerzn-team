@@ -30,33 +30,17 @@ const ICONS = {
   </svg>`,
 };
 
-// ---- VCF generation ------------------------------------------
+// ---- VCF (pre-built static files) ----------------------------
 
-function buildVCF(member, companyName) {
-  const [first, ...rest] = member.name.trim().split(/\s+/);
-  const last = rest.join(' ');
-
-  const lines = [
-    'BEGIN:VCARD',
-    'VERSION:3.0',
-    `FN:${member.name}`,
-    `N:${last};${first};;;`,
-    `TITLE:${member.role}`,
-    `ORG:${companyName}`,
-    `EMAIL;TYPE=WORK:${member.email}`,
-  ];
-
-  if (member.phone)     lines.push(`TEL;TYPE=WORK,VOICE:${member.phone}`);
-  if (member.linkedin)  lines.push(`URL;TYPE=LinkedIn:${member.linkedin}`);
-  if (member.instagram) lines.push(`URL;TYPE=Instagram:${member.instagram}`);
-
-  lines.push('END:VCARD');
-  return lines.join('\r\n');
-}
-
-async function addContact(member, companyName) {
-  const content  = buildVCF(member, companyName);
+async function addContact(member) {
+  const vcfUrl   = `../data/vcf/${member.id}.vcf`;
   const filename = `${member.id}.vcf`;
+
+  // Fetch the static VCF file
+  const res = await fetch(vcfUrl);
+  if (!res.ok) throw new Error(`Could not load contact file (${res.status})`);
+  const content = await res.text();
+
   const isAndroid = /android/i.test(navigator.userAgent);
 
   // Android: open the VCF via an <a> click WITHOUT the download attribute.
@@ -168,7 +152,7 @@ function renderMember(member, company) {
   document.getElementById('member-profile').innerHTML = profileHTML;
 
   document.getElementById('btn-add-contact')
-    .addEventListener('click', () => addContact(member, company.name));
+    .addEventListener('click', () => addContact(member));
 }
 
 function buildActionButtons(member) {

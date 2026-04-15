@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:2.1
+N;CHARSET=UTF-8:Angelo;Augusto
+FN;CHARSET=UTF-8:Augusto Angelo
+TEL;VOICE:+351 919315539
+ORG;CHARSET=UTF-8:Commerzn Service Provider Unip. LDA
+TITLE;CHARSET=UTF-8:Marketing
+ADR;CHARSET=UTF-8;WORK;PREF:;;Rua Martins Barata\, nº8B;Lisboa;1400-248;Portugal
+EMAIL:augusto.angelo@commerzn.com
+URL:https://www.commerzn.com/
+END:VCARD

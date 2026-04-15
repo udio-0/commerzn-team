@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:2.1
+N;CHARSET=UTF-8:Serra;Raul
+FN;CHARSET=UTF-8:Raul Serra
+TEL;VOICE:+351 914998980
+ORG;CHARSET=UTF-8:Commerzn Service Provider Unip. LDA
+TITLE;CHARSET=UTF-8:Arquitech
+ADR;CHARSET=UTF-8;WORK;PREF:;;Rua Martins Barata\, nº8B;Lisboa;1400-248;Portugal
+EMAIL:raul.serra@commerzn.com
+URL:https://www.commerzn.com/
+END:VCARD
