@@ -30,129 +30,83 @@ const ICONS = {
   </svg>`,
 };
 
-// ---- Contact preview modal --------------------------------------
+// ---- VCF generation ------------------------------------------
 
-function showContactModal(member, companyName) {
-  // Remove existing modal if any
-  const existing = document.getElementById('contact-modal');
-  if (existing) existing.remove();
+function buildVCF(member, companyName) {
+  const [first, ...rest] = member.name.trim().split(/\s+/);
+  const last = rest.join(' ');
 
-  const phone = ICONS.phone || `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+  const lines = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    `FN:${member.name}`,
+    `N:${last};${first};;;`,
+    `TITLE:${member.role}`,
+    `ORG:${companyName}`,
+    `EMAIL;TYPE=WORK:${member.email}`,
+  ];
 
-  // Build detail rows
-  const rows = [];
-  if (member.phone) {
-    rows.push(`
-      <a href="tel:${escapeHTML(member.phone)}" class="contact-modal__row">
-        <span class="contact-modal__row-icon">${phone}</span>
-        <span class="contact-modal__row-text">
-          <span class="contact-modal__row-label">Phone</span>
-          <span class="contact-modal__row-value">${escapeHTML(member.phone)}</span>
-        </span>
-      </a>
-    `);
-  }
-  if (member.email) {
-    rows.push(`
-      <a href="mailto:${escapeHTML(member.email)}" class="contact-modal__row">
-        <span class="contact-modal__row-icon">${ICONS.mail}</span>
-        <span class="contact-modal__row-text">
-          <span class="contact-modal__row-label">Email</span>
-          <span class="contact-modal__row-value">${escapeHTML(member.email)}</span>
-        </span>
-      </a>
-    `);
-  }
-  if (member.linkedin) {
-    rows.push(`
-      <div class="contact-modal__row">
-        <span class="contact-modal__row-icon">${ICONS.linkedin}</span>
-        <span class="contact-modal__row-text">
-          <span class="contact-modal__row-label">LinkedIn</span>
-          <span class="contact-modal__row-value">LinkedIn Profile</span>
-        </span>
-      </div>
-    `);
-  }
+  if (member.phone)     lines.push(`TEL;TYPE=WORK,VOICE:${member.phone}`);
+  if (member.linkedin)  lines.push(`URL;TYPE=LinkedIn:${member.linkedin}`);
+  if (member.instagram) lines.push(`URL;TYPE=Instagram:${member.instagram}`);
 
-  const modal = document.createElement('div');
-  modal.id = 'contact-modal';
-  modal.className = 'contact-modal';
-  modal.innerHTML = `
-    <div class="contact-modal__backdrop"></div>
-    <div class="contact-modal__sheet">
-      <div class="contact-modal__handle"></div>
-      <div class="contact-modal__header">
-        <img
-          class="contact-modal__photo"
-          src="${escapeHTML(member.photo)}"
-          alt="${escapeHTML(member.name)}"
-          width="72"
-          height="72"
-        >
-        <h2 class="contact-modal__name">${escapeHTML(member.name)}</h2>
-        <p class="contact-modal__role">${escapeHTML(member.role)}</p>
-        <p class="contact-modal__company">${escapeHTML(companyName)}</p>
-      </div>
-      <div class="contact-modal__details">
-        ${rows.join('')}
-      </div>
-      <div class="contact-modal__actions">
-        <button id="modal-save-contact" class="contact-modal__save" type="button">
-          Save to Contacts
-        </button>
-        <button id="modal-cancel" class="contact-modal__cancel" type="button">
-          Cancel
-        </button>
-      </div>
-    </div>
-  `;
+  lines.push('END:VCARD');
+  return lines.join('\r\n');
+}
 
-  document.body.appendChild(modal);
+async function addContact(member, companyName) {
+  const content  = buildVCF(member, companyName);
+  const filename = `${member.id}.vcf`;
+  const isAndroid = /android/i.test(navigator.userAgent);
 
-  // Trigger animation on next frame
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      modal.classList.add('contact-modal--open');
-    });
-  });
-
-  // Close handlers
-  const close = () => {
-    modal.classList.remove('contact-modal--open');
-    modal.addEventListener('transitionend', () => modal.remove(), { once: true });
-    // Fallback removal if transition doesn't fire
-    setTimeout(() => { if (modal.parentNode) modal.remove(); }, 400);
-  };
-
-  modal.querySelector('.contact-modal__backdrop').addEventListener('click', close);
-  document.getElementById('modal-cancel').addEventListener('click', close);
-
-  // Save button — download VCF file
-  document.getElementById('modal-save-contact').addEventListener('click', () => {
-    const [first, ...rest] = member.name.trim().split(/\s+/);
-    const last = rest.join(' ');
-    const lines = [
-      'BEGIN:VCARD', 'VERSION:3.0',
-      `FN:${member.name}`, `N:${last};${first};;;`,
-      `TITLE:${member.role}`, `ORG:${companyName}`,
-      `EMAIL;TYPE=WORK:${member.email}`,
-    ];
-    if (member.phone)     lines.push(`TEL;TYPE=WORK,VOICE:${member.phone}`);
-    if (member.linkedin)  lines.push(`URL;TYPE=LinkedIn:${member.linkedin}`);
-    if (member.instagram) lines.push(`URL;TYPE=Instagram:${member.instagram}`);
-    lines.push('END:VCARD');
-
-    const content = lines.join('\r\n');
-    const url = URL.createObjectURL(new Blob([content], { type: 'text/vcard' }));
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${member.id}.vcf`;
+  // Android: open the VCF via an <a> click WITHOUT the download attribute.
+  // This tells the browser to let the OS handle the MIME type, which triggers
+  // Android's native "Create Contact" screen with all details pre-filled.
+  if (isAndroid) {
+    const blob = new Blob([content], { type: 'text/x-vcard' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    // No a.download — this is intentional so Android opens instead of saving
+    a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  });
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    return;
+  }
+
+  // iOS / macOS: Web Share API works well with vCard files
+  if (navigator.share) {
+    const mimeTypes = ['text/vcard', 'text/x-vcard', 'text/plain'];
+    let shareFile = null;
+    for (const mime of mimeTypes) {
+      const f = new File([content], filename, { type: mime });
+      if (!navigator.canShare || navigator.canShare({ files: [f] })) {
+        shareFile = f;
+        break;
+      }
+    }
+
+    if (shareFile) {
+      try {
+        await navigator.share({ files: [shareFile] });
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return; // user cancelled
+      }
+    }
+  }
+
+  // Fallback: download (desktop)
+  const url = URL.createObjectURL(new Blob([content], { type: 'text/vcard' }));
+  const a   = document.createElement('a');
+  a.href     = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ---- Utility -------------------------------------------------
@@ -214,7 +168,7 @@ function renderMember(member, company) {
   document.getElementById('member-profile').innerHTML = profileHTML;
 
   document.getElementById('btn-add-contact')
-    .addEventListener('click', () => showContactModal(member, company.name));
+    .addEventListener('click', () => addContact(member, company.name));
 }
 
 function buildActionButtons(member) {
