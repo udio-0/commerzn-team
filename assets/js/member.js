@@ -128,11 +128,11 @@ function showContactModal(member, companyName) {
   modal.querySelector('.contact-modal__backdrop').addEventListener('click', close);
   document.getElementById('modal-cancel').addEventListener('click', close);
 
-  // Save button — navigate to the real server-hosted .vcf file.
-  // Android/iOS intercept the text/vcard MIME type and open the
-  // native Contacts app directly (no visible download).
+  // Save button — navigate to Cloudflare Worker which serves the VCF
+  // with Content-Disposition: inline, so Android/iOS open Contacts app directly
+  const WORKER_BASE = 'https://commerzn-vcard.claudioalexsantos.workers.dev';
   document.getElementById('modal-save-contact').addEventListener('click', () => {
-    window.location.href = `../contacts/${member.id}.vcf`;
+    window.location.href = `${WORKER_BASE}/${member.id}.vcf`;
   });
 }
 
