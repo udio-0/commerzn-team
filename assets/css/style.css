@@ -366,13 +366,17 @@ body.is-navigating {
   max-width: 100%;
   margin: 0 auto;
   padding: 0 0 3rem;
+  overflow: clip;
 }
 
 .projects-swiper {
-  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
   padding: 2rem 0 3rem;
   cursor: grab;
-  overflow: clip visible;
+  overflow: visible;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 
 .projects-swiper:active {

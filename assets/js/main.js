@@ -137,6 +137,9 @@ function initProjectsSwiper() {
     centeredSlides: true,
     initialSlide: Math.floor(swiperEl.querySelectorAll('.swiper-slide').length / 2),
     grabCursor: true,
+    touchStartPreventDefault: false,
+    touchMoveStopPropagation: true,
+    preventInteractionOnTransition: true,
     observer: true,
     observeParents: true,
     breakpoints: {
@@ -148,6 +151,14 @@ function initProjectsSwiper() {
         const activeSlide = swiperEl.querySelector('.swiper-slide-active');
         const link = activeSlide && activeSlide.dataset.link;
         if (link) window.open(link, '_blank', 'noopener,noreferrer');
+      },
+      touchStart: function () {
+        document.documentElement.style.scrollBehavior = 'auto';
+      },
+      touchEnd: function () {
+        requestAnimationFrame(() => {
+          document.documentElement.style.scrollBehavior = '';
+        });
       },
       slideChange: function () {
         updateProjectDescription(this);
@@ -166,18 +177,6 @@ function initProjectsSwiper() {
   descEl.style.minHeight = `${maxHeight}px`;
 
   updateProjectDescription(swiper);
-
-  const calculateHeight = () => {
-    const wraps = Array.from(swiperEl.querySelectorAll('.project-slide__image-wrap'));
-    if (!wraps.length) return;
-    const width = wraps[0].getBoundingClientRect().width;
-    const height = Math.round(width * (4 / 3));
-    wraps.forEach(el => el.style.height = `${height}px`);
-    swiper.update();
-  };
-
-  calculateHeight();
-  window.addEventListener('resize', calculateHeight);
 }
 
 // ---- Utility -------------------------------------------------
