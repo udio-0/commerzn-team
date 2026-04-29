@@ -205,6 +205,11 @@ function navigateTo(url) {
 
 // ---- Render --------------------------------------------------
 
+function resolvePhoto(photo) {
+  if (/^(https?:|data:|\/)/.test(photo)) return photo;
+  return `../${photo}`;
+}
+
 function renderMember(member, company) {
   document.title = `${member.name} — ${company.name}`;
 
@@ -213,7 +218,7 @@ function renderMember(member, company) {
       <div class="member-avatar__inner">
         <img
           class="member-avatar__img"
-          src="${escapeHTML(member.photo)}"
+          src="${escapeHTML(resolvePhoto(member.photo))}"
           alt="${escapeHTML(member.name)}"
           width="400"
           height="400"
